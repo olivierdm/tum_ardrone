@@ -319,25 +319,27 @@ int tum_ardrone_gui::mapKey(int k)
 {
 	switch(k)
 	{
-		case 74: //j
+		// http://qt-project.org/doc/qt-4.8/qt.html#Key-enum
+		case 69: //e
 			return 0;
-		case 75: //k
+		case 68: //d
 			return 1;
-		case 76: //l
+		case 83: //s
 			return 2;
-		case 73: //i
+		case 70: //f
 			return 3;
-		case 85: //u
+		case 74: //j
 			return 4;
-		case 79: //o
+		case 76: //l
 			return 5;
-		case 81: //q
+		case 73: //i
 			return 6;
-		case 65: //a
+		case 75: //k
 			return 7;
 	}
 	return -1;
 }
+
 
 void tum_ardrone_gui::keyReleaseEvent( QKeyEvent * key)
 {
