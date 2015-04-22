@@ -322,9 +322,9 @@ int tum_ardrone_gui::mapKey(int k)
 		// http://qt-project.org/doc/qt-4.8/qt.html#Key-enum
 		case 69: //e
 			return 0;
-		case 68: //d
-			return 1;
 		case 83: //s
+			return 1;
+		case 68: //d
 			return 2;
 		case 70: //f
 			return 3;
@@ -378,10 +378,10 @@ void tum_ardrone_gui::keyPressEvent( QKeyEvent * key)
 				rosThread->sendControlToDrone(calcKBControl());
 		}
 
-		else if(key->key() == 83)	// s
+		else if(key->key() == 84)	// s
 			rosThread->sendTakeoff();
 
-		else if(key->key() == 68)	// d
+		else if(key->key() == 89)	// d
 			rosThread->sendLand();
 	}
 
