@@ -319,14 +319,14 @@ int tum_ardrone_gui::mapKey(int k)
 {
 	switch(k)
 	{
-		// http://qt-project.org/doc/qt-4.8/qt.html#Key-enum
-		case 69: //e
-			return 0;
+		// http://api.kde.org/qyoto-api/class_qt_core_1_1_qt.html#a632272b1f891fdbe394baf8babe399fa
 		case 83: //s
-			return 1;
+			return 0;
 		case 68: //d
-			return 2;
+			return 1;
 		case 70: //f
+			return 2;
+		case 69: //e
 			return 3;
 		case 74: //j
 			return 4;
@@ -378,10 +378,10 @@ void tum_ardrone_gui::keyPressEvent( QKeyEvent * key)
 				rosThread->sendControlToDrone(calcKBControl());
 		}
 
-		else if(key->key() == 84)	// s
+		else if(key->key() == 84)	// t
 			rosThread->sendTakeoff();
 
-		else if(key->key() == 89)	// d
+		else if(key->key() == 89)	// y
 			rosThread->sendLand();
 	}
 
@@ -407,14 +407,14 @@ ControlCommand tum_ardrone_gui::calcKBControl()
 
 	ControlCommand c;
 
-	if(isPressed[0]) c.roll = -sensRP; // j
-	if(isPressed[1]) c.pitch = sensRP; // k
-	if(isPressed[2]) c.roll = sensRP; // l
-	if(isPressed[3]) c.pitch = -sensRP; // i
-	if(isPressed[4]) c.yaw = -sensYaw; // u
-	if(isPressed[5]) c.yaw = sensYaw; // o
-	if(isPressed[6]) c.gaz = sensRP; // q
-	if(isPressed[7]) c.gaz = -sensRP; // a
+	if(isPressed[0]) c.roll = -sensRP; // s
+	if(isPressed[1]) c.pitch = sensRP; // d
+	if(isPressed[2]) c.roll = sensRP; // f
+	if(isPressed[3]) c.pitch = -sensRP; // e
+	if(isPressed[4]) c.yaw = -sensYaw; // j
+	if(isPressed[5]) c.yaw = sensYaw; // l
+	if(isPressed[6]) c.gaz = sensRP; // i
+	if(isPressed[7]) c.gaz = -sensRP; // k
 
 	return c;
 }

@@ -25,6 +25,11 @@
 #include <stdio.h>
 #include "RosThread.h"
 #include "tum_ardrone_gui.h"
+#include <fstream>
+#include <opencv2/opencv.hpp>
+#include "opencv2/core/utility.hpp"
+#include <opencv2/imgproc/imgproc.hpp>
+
 
 PingThread::PingThread()
 {
@@ -77,8 +82,8 @@ void PingThread::run()
 {
 	std::cout << "Starting PING Thread" << std::endl;
 
-	sprintf(pingCommand20000,"ping -c 1 -s 20000 -w 1 192.168.1.1");
-	sprintf(pingCommand500,"ping -c 1 -s 500 -w 1 192.168.1.1");
+	sprintf(pingCommand20000,"ping -c 1 -s 20000 -w 1 192.168.2.165");
+	sprintf(pingCommand500,"ping -c 1 -s 500 -w 1 192.168.2.165");
 	ros::Rate r(2.0);
 	FILE *p;
 
@@ -111,6 +116,13 @@ void PingThread::run()
 			double res20000 = parsePingResult(line2);
 
 			std::cout << "new ping values: 500->" << res500 << " 20000->" << res20000 << std::endl;
+			
+			/* Write ping values to csv file */
+			std::ofstream myfile;
+			myfile.open ("histogram.csv",std::ofstream::out | std::ofstream::app);
+			myfile << res500 << ", " << res20000 << std::endl;
+			myfile.close();
+			//*/
 
 			// clip between 10 and 1000.
 			res500 = std::min(1000.0,std::max(10.0,res500));

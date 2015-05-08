@@ -27,6 +27,7 @@
 #include "DroneKalmanFilter.h"
 #include "PTAMWrapper.h"
 #include "EstimationNode.h"
+#include <tf/transform_broadcaster.h>
 
 pthread_mutex_t MapView::trailPointsVec_CS = PTHREAD_MUTEX_INITIALIZER; //pthread_mutex_lock( &cs_mutex );
 
@@ -95,7 +96,11 @@ void MapView::Render()
 	lastFramePoseSpeed = filter->getCurrentPoseSpeedAsVec();	// Note: this is maybe an old pose, but max. one frame old = 50ms = not noticable.
 	pthread_mutex_unlock(&filter->filter_CS);
 
-	
+	tf::TransformBroadcaster br_ardrone;
+	tf::Transform transform_ardrone;
+    transform_ardrone.setOrigin( tf::Vector3(lastFramePoseSpeed[1], -lastFramePoseSpeed[0], lastFramePoseSpeed[2]) );
+    transform_ardrone.setRotation( tf::createQuaternionFromRPY(lastFramePoseSpeed[3]/180*3.141592, -lastFramePoseSpeed[4]/180*3.141592, -lastFramePoseSpeed[5]/180*3.141592) );
+    br_ardrone.sendTransform(tf::StampedTransform(transform_ardrone, ros::Time::now(), "map", "tum_base_link"));
 
 
 	if(clearTrail)
