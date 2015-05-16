@@ -208,4 +208,9 @@ add_executable(drone_gui ${GUI_SOURCE_FILES} ${GUI_RESOURCE_FILES_CPP} ${GUI_UI_
 target_link_libraries(drone_gui ${QT_LIBRARIES} cvd ${catkin_LIBRARIES})
 add_dependencies(drone_gui thirdparty ${PROJECT_NAME}_gencpp ${PROJECT_NAME}_gencfg)
 
-
+# Install Rules
+install(TARGETS drone_gui RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+install(DIRECTORY launch/
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
+    PATTERN ".git" EXCLUDE
+)
