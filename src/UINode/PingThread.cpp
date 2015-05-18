@@ -118,10 +118,10 @@ void PingThread::run()
 			std::cout << "new ping values: 500->" << res500 << " 20000->" << res20000 << std::endl;
 			
 			/* Write ping values to csv file */
-			std::ofstream myfile;
-			myfile.open ("histogram.csv",std::ofstream::out | std::ofstream::app);
-			myfile << res500 << ", " << res20000 << std::endl;
-			myfile.close();
+			//std::ofstream myfile;
+			//myfile.open ("histogram.csv",std::ofstream::out | std::ofstream::app);
+			//myfile << res500 << ", " << res20000 << std::endl;
+			//myfile.close();
 			//*/
 
 			// clip between 10 and 1000.
